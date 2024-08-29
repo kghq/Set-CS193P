@@ -8,14 +8,42 @@
 import SwiftUI
 
 struct ContentView: View {
+    let game = SetGame()
+    
+    var body: some View {
+        table
+    }
+    
+    private var table: some View {
+        ForEach(game.deck) { card in
+            CardView(card)
+        }
+    }
+    
+}
+
+struct CardView: View {
+    var card: SetGame.Card
+    
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            Text("\(card.numberOfShapes)")
+            Text("\(card.shape)")
+            Text("\(card.shading)")
+            Text("\(card.color)")
         }
         .padding()
+        .background(
+            RoundedRectangle(cornerRadius: 12)
+                .stroke(card.isChosen ? .blue : .gray, lineWidth: 3)
+        )
+//        .onTapGesture {
+//            card.isChosen.toggle()
+//        }
+    }
+    
+    init(_ card: SetGame.Card) {
+        self.card = card
     }
 }
 
