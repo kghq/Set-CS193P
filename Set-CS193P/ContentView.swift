@@ -17,8 +17,8 @@ struct ContentView: View {
     
     private var table: some View {
         ScrollView {
-            LazyVGrid(columns: [GridItem(), GridItem()]) {
-                ForEach(game.deck) { card in
+            LazyVGrid(columns: [GridItem(), GridItem(), GridItem()]) {
+                ForEach(game.tableDeck) { card in
                     CardView(card)
                         .onTapGesture {
                             game.choose(card)

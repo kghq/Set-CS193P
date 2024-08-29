@@ -15,14 +15,18 @@ class ViewModel {
         model = ViewModel.createSetGame()
     }
     
+    static func createSetGame() -> SetGame {
+        return SetGame()
+    }
+    
     private var model: SetGame
     
     var deck: [SetGame.Card] {
         return model.deck
     }
     
-    static func createSetGame() -> SetGame {
-        return SetGame()
+    var tableDeck: [SetGame.Card] {
+        return model.tableDeck
     }
     
     func choose(_ card: SetGame.Card) {
