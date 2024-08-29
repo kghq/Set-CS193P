@@ -5,18 +5,26 @@
 //  Created by Krzysztof Garmulewicz on 29/08/2024.
 //
 
+import Observation
 import SwiftUI
 
 struct ContentView: View {
-    let game = SetGame()
+    var game = ViewModel()
     
     var body: some View {
         table
     }
     
     private var table: some View {
-        ForEach(game.deck) { card in
-            CardView(card)
+        ScrollView {
+            LazyVGrid(columns: [GridItem(), GridItem()]) {
+                ForEach(game.deck) { card in
+                    CardView(card)
+                        .onTapGesture {
+                            game.choose(card)
+                        }
+                }
+            }
         }
     }
     
@@ -27,19 +35,19 @@ struct CardView: View {
     
     var body: some View {
         VStack {
-            Text("\(card.numberOfShapes)")
-            Text("\(card.shape)")
-            Text("\(card.shading)")
-            Text("\(card.color)")
+            HStack {
+                Text("\(card.numberOfShapes)")
+                Text("\(card.shape)")
+                Text("\(card.shading)")
+                Text("\(card.color)")
+            }
+            Text("\(card.isChosen)")
         }
         .padding()
         .background(
             RoundedRectangle(cornerRadius: 12)
-                .stroke(card.isChosen ? .blue : .gray, lineWidth: 3)
+                .stroke(card.isChosen ? .blue : .yellow, lineWidth: 3)
         )
-//        .onTapGesture {
-//            card.isChosen.toggle()
-//        }
     }
     
     init(_ card: SetGame.Card) {

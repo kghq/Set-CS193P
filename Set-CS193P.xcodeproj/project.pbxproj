@@ -12,6 +12,7 @@
 		330228712C8063C3006415E7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 330228702C8063C3006415E7 /* Assets.xcassets */; };
 		330228742C8063C3006415E7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 330228732C8063C3006415E7 /* Preview Assets.xcassets */; };
 		3302287D2C80765D006415E7 /* SetGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3302287C2C80765D006415E7 /* SetGame.swift */; };
+		330228812C80781B006415E7 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 330228802C80781B006415E7 /* ViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +22,7 @@
 		330228702C8063C3006415E7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		330228732C8063C3006415E7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		3302287C2C80765D006415E7 /* SetGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetGame.swift; sourceTree = "<group>"; };
+		330228802C80781B006415E7 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 				3302286C2C8063C2006415E7 /* Set_CS193PApp.swift */,
 				3302286E2C8063C2006415E7 /* ContentView.swift */,
 				3302287C2C80765D006415E7 /* SetGame.swift */,
+				330228802C80781B006415E7 /* ViewModel.swift */,
 				330228702C8063C3006415E7 /* Assets.xcassets */,
 				330228722C8063C3006415E7 /* Preview Content */,
 			);
@@ -142,6 +145,7 @@
 			files = (
 				3302286F2C8063C2006415E7 /* ContentView.swift in Sources */,
 				3302287D2C80765D006415E7 /* SetGame.swift in Sources */,
+				330228812C80781B006415E7 /* ViewModel.swift in Sources */,
 				3302286D2C8063C2006415E7 /* Set_CS193PApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
