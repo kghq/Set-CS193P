@@ -32,4 +32,8 @@ class ViewModel {
     func choose(_ card: SetGame.Card) {
         model.choose(card)
     }
+    
+    func drawCard(amount: Int) {
+        model.drawCard(amount: amount)
+    }
 }

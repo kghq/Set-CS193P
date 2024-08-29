@@ -12,6 +12,9 @@ struct ContentView: View {
     var game = ViewModel()
     
     var body: some View {
+//        Button("Add") {
+//            game.drawCard(amount: 1)
+//        }
         table
     }
     
@@ -34,19 +37,16 @@ struct CardView: View {
     var card: SetGame.Card
     
     var body: some View {
-        VStack {
-            HStack {
-                Text("\(card.numberOfShapes)")
-                Text("\(card.shape)")
-                Text("\(card.shading)")
-                Text("\(card.color)")
-            }
-            Text("\(card.isChosen)")
+        HStack {
+            Text("\(card.numberOfShapes)")
+            Text("\(card.shape)")
+            Text("\(card.shading)")
+            Text("\(card.color)")
         }
         .padding()
         .background(
             RoundedRectangle(cornerRadius: 12)
-                .stroke(card.isChosen ? .blue : .yellow, lineWidth: 3)
+                .strokeBorder(card.isChosen ? .blue : .yellow, lineWidth: 3)
         )
     }
     

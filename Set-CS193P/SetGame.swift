@@ -41,19 +41,15 @@ struct SetGame {
                 
                 // checking for set and resetting the round
                 if chosenCards.count == 3 {
-                    var setFound = false
                     
-                    // round of checks for set
-                    // there is set if:
-                    // card[0]
-                    
-                    if setFound {
-                        // remove set cards from table and draw next
+                    // if set found: remove set cards from table and draw next
+                    if setIsFound(in: chosenCards) {
                         tableDeck.removeAll(where: { $0.isChosen == true })
                         drawCard(amount: 3)
                         chosenCards.removeAll()
+                    // if set not found: clear chosenCards and turn off highlight
                     } else {
-                        for index in 0...tableDeck.count - 1 {
+                        for index in 0..<tableDeck.count {
                             tableDeck[index].isChosen = false
                         }
                         chosenCards.removeAll()
@@ -75,9 +71,60 @@ struct SetGame {
         }
     }
     
-    func setChecker(_ cards: [Card]) -> Bool {
-        for index in 0...cards.count {
-            
+    // round of checks for set
+    // there is room for improvement when it comes to implementation
+    func setIsFound(in cards: [Card]) -> Bool {
+        // those checks are far from elegant
+        // match
+        let numberOfShapesMatching = (cards[0].numberOfShapes == cards[1].numberOfShapes) && (cards[0].numberOfShapes == cards[2].numberOfShapes)
+        let shapesMatching = (cards[0].shape == cards[1].shape) && (cards[0].shape == cards[2].shape)
+        let shadingMatching = (cards[0].shading == cards[1].shading) && (cards[0].shading == cards[2].shading)
+        let colorsMatching = (cards[0].color == cards[1].color) && (cards[0].color == cards[2].color)
+        // not match
+        let numberOfShapesNotMatching = (cards[0].numberOfShapes != cards[1].numberOfShapes) && (cards[1].numberOfShapes != cards[2].numberOfShapes) && (cards[0].numberOfShapes != cards[2].numberOfShapes)
+        let shapesNotMatching = (cards[0].shape != cards[1].shape) && (cards[1].shape != cards[2].shape) && (cards[0].shape != cards[2].shape)
+        let shadingNotMatching = (cards[0].shading != cards[1].shading) && (cards[1].shading != cards[2].shading) && (cards[0].shading != cards[2].shading)
+        let colorsNotMatching = (cards[0].color != cards[1].color) && (cards[1].color != cards[2].color) && (cards[0].color != cards[2].color)
+        
+        // set found if one of those:
+        if numberOfShapesNotMatching && shapesNotMatching && shadingNotMatching && colorsNotMatching {
+            return true
+        }
+        
+        if numberOfShapesMatching && shapesMatching && shadingNotMatching && colorsNotMatching {
+            return true
+        }
+        
+        if numberOfShapesMatching && shapesMatching && shadingMatching && colorsNotMatching {
+            return true
+        }
+        
+        if numberOfShapesNotMatching && shapesNotMatching && shadingNotMatching && colorsMatching {
+            return true
+        }
+        
+        if numberOfShapesNotMatching && shapesNotMatching && shadingMatching && colorsMatching {
+            return true
+        }
+        
+        if numberOfShapesNotMatching && shapesMatching && shadingMatching && colorsMatching {
+            return true
+        }
+        
+        if numberOfShapesMatching && shapesNotMatching && shadingNotMatching && colorsMatching {
+            return true
+        }
+        
+        if numberOfShapesMatching && shapesNotMatching && shadingNotMatching && colorsMatching {
+            return true
+        }
+        
+        if numberOfShapesMatching && shapesNotMatching && shadingMatching && colorsMatching {
+            return true
+        }
+        
+        if numberOfShapesMatching && shapesMatching && shadingMatching && colorsMatching {
+            return true
         }
         
         return false
@@ -102,7 +149,6 @@ struct SetGame {
             for shape in 1...3 {
                 for shading in 1...3 {
                     for color in 1...3 {
-                        //let id = numberOfShapes * 1000 + shape * 100 + shading * 10 + color
                         let newCard = Card(numberOfShapes: numberOfShapes, shape: shape, shading: shading, color: color)
                         deck.append(newCard)
                     }
