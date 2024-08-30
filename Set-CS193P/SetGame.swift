@@ -47,7 +47,11 @@ struct SetGame {
                     if setIsFound(in: chosenCards) {
                         score += 1
                         tableDeck.removeAll(where: { $0.isChosen == true })
-                        drawCard(amount: 3)
+                        // adds so many cards as to be back with 12
+                        if tableDeck.count < 12 {
+                            drawCard(amount: 12 - tableDeck.count)
+                        }
+                        //drawCard(amount: 3)
                         chosenCards.removeAll()
                     // if set not found: clear chosenCards and turn off highlight
                     } else {
@@ -93,6 +97,10 @@ struct SetGame {
         }
         
         if numberOfShapesMatching && shapesMatching && shadingNotMatching && colorsNotMatching {
+            return true
+        }
+        
+        if numberOfShapesMatching && shapesMatching && shadingNotMatching && colorsMatching {
             return true
         }
         
