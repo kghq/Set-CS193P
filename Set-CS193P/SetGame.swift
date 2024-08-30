@@ -148,9 +148,9 @@ struct SetGame {
         score = 0
         
         for numberOfShapes in 1...3 {
-            for shape in 1...3 {
-                for shading in 1...3 {
-                    for color in 1...3 {
+            for shape in 0...2 {
+                for shading in 0...2 {
+                    for color in 0...2 {
                         let newCard = Card(numberOfShapes: numberOfShapes, shape: shape, shading: shading, color: color)
                         deck.append(newCard)
                     }

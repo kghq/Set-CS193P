@@ -38,13 +38,52 @@ struct ContentView: View {
 struct CardView: View {
     var card: SetGame.Card
     
+    var shading: Double {
+        if card.shading == 0 {
+            return 0
+        } else if card.shading == 1 {
+            return 0.5
+        } else {
+            return 1
+        }
+    }
+
+    var color: Color {
+        if card.color == 0 {
+            return .red
+        } else if card.color == 1 {
+            return .green
+        } else {
+            return .purple
+        }
+    }
+    
     var body: some View {
         VStack {
-            Text("\(card.numberOfShapes)")
-            Text("\(card.shape)")
-            Text("\(card.shading)")
-            Text("\(card.color)")
+            ForEach(0..<card.numberOfShapes, id: \.self) { _ in
+                if card.shape == 0 {
+                    Rectangle()
+                        .strokeBorder(color, lineWidth: 3)
+                        .fill(color.opacity(shading))
+                        .frame(width: 30, height: 30)
+                } else if card.shape == 1 {
+                    Circle()
+                        .strokeBorder(color, lineWidth: 3)
+                        .fill(color.opacity(shading))
+                        .frame(width: 30, height: 30)
+                } else {
+                    Rectangle()
+                        .strokeBorder(color, lineWidth: 3)
+                        .fill(color.opacity(shading))
+                        .frame(width: 20, height: 40)
+                        .rotationEffect(.degrees(45))
+                }
+            }
+//            Text("\(card.numberOfShapes)")
+//            Text("\(card.shading)")
+//            Text("\(card.color)")
         }
+        .frame(width: 70, height: 120)
         .padding()
         .background(
             RoundedRectangle(cornerRadius: 12)
