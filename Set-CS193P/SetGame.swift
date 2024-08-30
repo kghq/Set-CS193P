@@ -10,8 +10,9 @@ import Foundation
 struct SetGame {
     private(set) var deck: [Card]
     private(set) var tableDeck: [Card]
+    private(set) var score: Int
     
-    struct Card: Identifiable {
+    struct Card: Identifiable, Equatable {
         let numberOfShapes: Int // one, two, or three
         let shape: Int // diamond, squiggle, oval
         let shading: Int // solid, striped, or open
@@ -42,8 +43,9 @@ struct SetGame {
                 // checking for set and resetting the round
                 if chosenCards.count == 3 {
                     
-                    // if set found: remove set cards from table and draw next
+                    // if set found: add point, remove set cards from table and draw next
                     if setIsFound(in: chosenCards) {
+                        score += 1
                         tableDeck.removeAll(where: { $0.isChosen == true })
                         drawCard(amount: 3)
                         chosenCards.removeAll()
@@ -54,7 +56,6 @@ struct SetGame {
                         }
                         chosenCards.removeAll()
                     }
-                    
                 }
                 
                 
@@ -72,7 +73,7 @@ struct SetGame {
     }
     
     // round of checks for set
-    // there is room for improvement when it comes to implementation
+    // implementation leaves much to be desired
     func setIsFound(in cards: [Card]) -> Bool {
         // those checks are far from elegant
         // match
@@ -144,6 +145,7 @@ struct SetGame {
     init() {
         deck = []
         tableDeck = []
+        score = 0
         
         for numberOfShapes in 1...3 {
             for shape in 1...3 {

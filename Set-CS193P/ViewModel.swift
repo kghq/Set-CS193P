@@ -21,6 +21,8 @@ class ViewModel {
     
     private var model: SetGame
     
+    // MARK: Game Components
+    
     var deck: [SetGame.Card] {
         return model.deck
     }
@@ -28,6 +30,12 @@ class ViewModel {
     var tableDeck: [SetGame.Card] {
         return model.tableDeck
     }
+    
+    var score: Int {
+        return model.score
+    }
+    
+    // MARK: intents
     
     func choose(_ card: SetGame.Card) {
         model.choose(card)

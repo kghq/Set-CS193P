@@ -12,10 +12,12 @@ struct ContentView: View {
     var game = ViewModel()
     
     var body: some View {
-//        Button("Add") {
-//            game.drawCard(amount: 1)
-//        }
+        Button("Add") {
+            game.drawCard(amount: 1)
+        }
         table
+            .animation(/*@START_MENU_TOKEN@*/.easeIn/*@END_MENU_TOKEN@*/, value: game.deck)
+        Text("Score: \(game.score)")
     }
     
     private var table: some View {
@@ -37,7 +39,7 @@ struct CardView: View {
     var card: SetGame.Card
     
     var body: some View {
-        HStack {
+        VStack {
             Text("\(card.numberOfShapes)")
             Text("\(card.shape)")
             Text("\(card.shading)")
