@@ -48,6 +48,8 @@ class ViewModel {
     func newGame() {
         model = ViewModel.createSetGame()
     }
+    
+    func testFunc() {
+        // will delete
+    }
 }
-
-// test commit 3
