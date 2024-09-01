@@ -49,3 +49,5 @@ class ViewModel {
         model = ViewModel.createSetGame()
     }
 }
+
+// test commit
