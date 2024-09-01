@@ -48,8 +48,4 @@ class ViewModel {
     func newGame() {
         model = ViewModel.createSetGame()
     }
-    
-    func testFunc() {
-        // will delete
-    }
 }
