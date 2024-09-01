@@ -12,13 +12,17 @@ struct SetGame {
     private(set) var tableDeck: [Card]
     private(set) var score: Int
     
+    enum Selection {
+        case free, chosen, matched
+    }
+    
     struct Card: Identifiable, Equatable {
         let numberOfShapes: Int // one, two, or three
         let shape: Int // diamond, squiggle, oval
         let shading: Int // solid, striped, or open
         let color: Int // red, green, or purple
         
-        var isChosen = false // blue/gray stroke when chosen/unchosen
+        var selectionState = Selection.free
         let id = UUID()
     }
     
@@ -26,53 +30,66 @@ struct SetGame {
     
     mutating func choose(_ card: Card) {
         
+        // getting the selected card
         if let chosenIndex = tableDeck.firstIndex(where: { $0.id == card.id } ) {
             
-            // what to do when card is chosen: if there is 3 now, check for set
-            if tableDeck[chosenIndex].isChosen == false {
-                
-                // setting to highlight choice
-                tableDeck[chosenIndex].isChosen = true
-                
-                // adding cards to potential check
-                if chosenCards.count < 3 {
-                    chosenCards.append(tableDeck[chosenIndex])
-                    print(chosenCards.count)
-                }
-                
-                // checking for set and resetting the round
-                if chosenCards.count == 3 {
-                    
-                    // if set found: add point, remove set cards from table and draw next
-                    if setIsFound(in: chosenCards) {
-                        score += 1
-                        tableDeck.removeAll(where: { $0.isChosen == true })
-                        // adds so many cards as to be back with 12
-                        if tableDeck.count < 12 {
-                            drawCard(amount: 12 - tableDeck.count)
+            selectACard(withIndex: chosenIndex)
+            
+            // making a temp deck of chosen cards
+            var chosenCards: [Card] {
+                return tableDeck.filter( { $0.selectionState == .chosen } )
+            }
+            
+            // checking if we have a set from previous round
+            var weHaveASet: Bool {
+                return tableDeck.contains( where: { $0.selectionState == .matched } )
+            }
+            
+            // what to do, when there is a match from previous round
+            
+            // check for a match with 3 cards
+            if chosenCards.count == 3 {
+                if setIsFound(in: chosenCards) {
+                    score += 1
+                    for index in tableDeck.indices {
+                        if tableDeck[index].selectionState == .chosen {
+                            tableDeck[index].selectionState = .matched
                         }
-                        //drawCard(amount: 3)
-                        chosenCards.removeAll()
-                    // if set not found: clear chosenCards and turn off highlight
-                    } else {
-                        for index in 0..<tableDeck.count {
-                            tableDeck[index].isChosen = false
-                        }
-                        chosenCards.removeAll()
                     }
                 }
-                
-                
-                
-            // what to do when card is unchosen
-            } else {
-                // toggle highlight
-                tableDeck[chosenIndex].isChosen = false
-                
-                // remove from chosencards
-                chosenCards.removeAll(where: { $0.id == tableDeck[chosenIndex].id } )
-                print(chosenCards.count)
             }
+            
+            // start new selection if no match with 3 cards
+            if chosenCards.count == 4 || (chosenCards.count == 1 && weHaveASet) {
+                if weHaveASet {
+                    newRound()
+                } else {
+                    for index in 0..<tableDeck.count {
+                        tableDeck[index].selectionState = .free
+                    }
+                    selectACard(withIndex: chosenIndex)
+                }
+            }
+            
+            // What to do, when set is found
+            if chosenCards.count == 3 {
+                if setIsFound(in: chosenCards) {
+                    score += 1
+                    for index in tableDeck.indices {
+                        if tableDeck[index].selectionState == .chosen {
+                            tableDeck[index].selectionState = .matched
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    mutating func selectACard(withIndex chosenIndex: Int) {
+        if tableDeck[chosenIndex].selectionState == .free {
+            tableDeck[chosenIndex].selectionState = .chosen
+        } else if tableDeck[chosenIndex].selectionState == .chosen {
+            tableDeck[chosenIndex].selectionState = .free
         }
     }
     
@@ -148,6 +165,14 @@ struct SetGame {
             }
         }
     }
+    
+    // what to do after set found (button to discard set and draw new cards)
+    mutating func newRound() {
+        tableDeck.removeAll(where: { $0.selectionState == .matched } )
+        drawCard(amount: 3)
+    }
+    
+    // make new game
     
     // init creates a full deck of cards, shuffled. It populates cards with abstract Ints, rather than concrete features
     init() {

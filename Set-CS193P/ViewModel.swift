@@ -41,7 +41,11 @@ class ViewModel {
         model.choose(card)
     }
     
-    func drawCard(amount: Int) {
-        model.drawCard(amount: amount)
+    func addCards() {
+        model.newRound()
+    }
+    
+    func newGame() {
+        model = ViewModel.createSetGame()
     }
 }

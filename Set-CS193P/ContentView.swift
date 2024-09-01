@@ -12,12 +12,16 @@ struct ContentView: View {
     var game = ViewModel()
     
     var body: some View {
-        Button("Add") {
-            game.drawCard(amount: 1)
-        }
         table
             .animation(/*@START_MENU_TOKEN@*/.easeIn/*@END_MENU_TOKEN@*/, value: game.deck)
         Text("Score: \(game.score)")
+        Button("Deal 3 More Cards") {
+            game.addCards()
+        }
+        .disabled(game.deck.isEmpty)
+        Button("New Game") {
+            game.newGame()
+        }
     }
     
     private var table: some View {
@@ -32,7 +36,6 @@ struct ContentView: View {
             }
         }
     }
-    
 }
 
 struct CardView: View {
@@ -55,6 +58,18 @@ struct CardView: View {
             return .green
         } else {
             return .purple
+        }
+    }
+    
+    // selection highlight
+    var selectionHighlight: Color {
+        switch card.selectionState {
+            case .free:
+                return .yellow
+            case .chosen:
+                return .blue
+            case .matched:
+                return .orange
         }
     }
     
@@ -87,7 +102,7 @@ struct CardView: View {
         .padding()
         .background(
             RoundedRectangle(cornerRadius: 12)
-                .strokeBorder(card.isChosen ? .blue : .yellow, lineWidth: 3)
+                .strokeBorder(selectionHighlight, lineWidth: 3)
         )
     }
     
