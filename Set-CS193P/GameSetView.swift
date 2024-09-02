@@ -8,12 +8,13 @@
 import Observation
 import SwiftUI
 
-struct ContentView: View {
+struct GameSetView: View {
     var game = ViewModel()
     
     var body: some View {
         table
             .animation(/*@START_MENU_TOKEN@*/.easeIn/*@END_MENU_TOKEN@*/, value: game.deck)
+            .padding()
         Text("Score: \(game.score)")
         Button("Deal 3 More Cards") {
             game.addCards()
@@ -25,8 +26,12 @@ struct ContentView: View {
     }
     
     private var table: some View {
-        ScrollView {
-            LazyVGrid(columns: [GridItem(), GridItem(), GridItem()]) {
+        GeometryReader { geometry in
+            let gridItemSize = gridItemWidthThatFits(count: game.tableDeck.count, size: geometry.size, atAspectRatio: 2/3)
+            LazyVGrid(columns: [
+                GridItem(.adaptive(minimum: gridItemSize), spacing: 0)
+            
+            ], spacing: 0) {
                 ForEach(game.tableDeck) { card in
                     CardView(card)
                         .onTapGesture {
@@ -35,6 +40,10 @@ struct ContentView: View {
                 }
             }
         }
+    }
+    
+    func gridItemWidthThatFits( count: Int, size: CGSize, atAspectRatio aspectRatio: CGFloat) -> CGFloat {
+        return 95
     }
 }
 
@@ -95,8 +104,8 @@ struct CardView: View {
                 }
             }
         }
-        .frame(width: 70, height: 120)
-        .padding()
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .aspectRatio(3/4, contentMode: .fit)
         .background(
             RoundedRectangle(cornerRadius: 12)
                 .strokeBorder(selectionHighlight, lineWidth: 3)
@@ -109,5 +118,5 @@ struct CardView: View {
 }
 
 #Preview {
-    ContentView()
+    GameSetView()
 }
