@@ -1,5 +1,8 @@
 #  Notes
 
+## CardView
+A CardView will have to be made with explicitly defined ratio and shapes inside. All of this only THEN can be resized to whatever i want. But first, create a card with a specific dimensions and the shapes inside conform their size to whatever card gives them. This all can then be transfered into GameSetView.
+
 ## My own implementation of gameplay. Erased and made conforming to assignment
     mutating func choose(_ card: Card) {
         

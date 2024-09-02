@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3302286D2C8063C2006415E7 /* Set_CS193PApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3302286C2C8063C2006415E7 /* Set_CS193PApp.swift */; };
-		3302286F2C8063C2006415E7 /* GameSetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3302286E2C8063C2006415E7 /* GameSetView.swift */; };
+		3302286F2C8063C2006415E7 /* SetGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3302286E2C8063C2006415E7 /* SetGameView.swift */; };
 		330228712C8063C3006415E7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 330228702C8063C3006415E7 /* Assets.xcassets */; };
 		330228742C8063C3006415E7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 330228732C8063C3006415E7 /* Preview Assets.xcassets */; };
 		3302287D2C80765D006415E7 /* SetGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3302287C2C80765D006415E7 /* SetGame.swift */; };
@@ -19,7 +19,7 @@
 /* Begin PBXFileReference section */
 		330228692C8063C2006415E7 /* Set-CS193P.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Set-CS193P.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3302286C2C8063C2006415E7 /* Set_CS193PApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Set_CS193PApp.swift; sourceTree = "<group>"; };
-		3302286E2C8063C2006415E7 /* GameSetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSetView.swift; sourceTree = "<group>"; };
+		3302286E2C8063C2006415E7 /* SetGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetGameView.swift; sourceTree = "<group>"; };
 		330228702C8063C3006415E7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		330228732C8063C3006415E7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		3302287C2C80765D006415E7 /* SetGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetGame.swift; sourceTree = "<group>"; };
@@ -60,7 +60,7 @@
 			children = (
 				33C283842C85C03900E70D88 /* AspectVGrid.swift */,
 				3302286C2C8063C2006415E7 /* Set_CS193PApp.swift */,
-				3302286E2C8063C2006415E7 /* GameSetView.swift */,
+				3302286E2C8063C2006415E7 /* SetGameView.swift */,
 				3302287C2C80765D006415E7 /* SetGame.swift */,
 				332505022C843C9B00C5610F /* NOTES.md */,
 				330228802C80781B006415E7 /* ViewModel.swift */,
@@ -148,7 +148,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3302286F2C8063C2006415E7 /* GameSetView.swift in Sources */,
+				3302286F2C8063C2006415E7 /* SetGameView.swift in Sources */,
 				3302287D2C80765D006415E7 /* SetGame.swift in Sources */,
 				330228812C80781B006415E7 /* ViewModel.swift in Sources */,
 				33C283852C85C03900E70D88 /* AspectVGrid.swift in Sources */,

@@ -8,7 +8,7 @@
 import Observation
 import SwiftUI
 
-struct GameSetView: View {
+struct SetGameView: View {
     var game = ViewModel()
     
     var body: some View {
@@ -129,5 +129,5 @@ struct CardView: View {
 }
 
 #Preview {
-    GameSetView()
+    SetGameView()
 }
