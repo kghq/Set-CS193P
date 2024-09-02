@@ -10,7 +10,7 @@ import Foundation
 struct SetGame {
     private(set) var deck: [Card]
     private(set) var tableDeck: [Card]
-    private(set) var score: Int
+    private(set) var score = 0
     
     enum Selection {
         case free, chosen, matched
@@ -109,48 +109,66 @@ struct SetGame {
         let colorsNotMatching = (cards[0].color != cards[1].color) && (cards[1].color != cards[2].color) && (cards[0].color != cards[2].color)
         
         // set found if one of those:
-        if numberOfShapesNotMatching && shapesNotMatching && shadingNotMatching && colorsNotMatching {
-            return true
-        }
-        
-        if numberOfShapesMatching && shapesMatching && shadingNotMatching && colorsNotMatching {
-            return true
-        }
-        
-        if numberOfShapesMatching && shapesMatching && shadingNotMatching && colorsMatching {
-            return true
-        }
-        
-        if numberOfShapesMatching && shapesMatching && shadingMatching && colorsNotMatching {
-            return true
-        }
-        
-        if numberOfShapesNotMatching && shapesNotMatching && shadingNotMatching && colorsMatching {
-            return true
-        }
-        
-        if numberOfShapesNotMatching && shapesNotMatching && shadingMatching && colorsMatching {
-            return true
-        }
-        
-        if numberOfShapesNotMatching && shapesMatching && shadingMatching && colorsMatching {
-            return true
-        }
-        
-        if numberOfShapesMatching && shapesNotMatching && shadingNotMatching && colorsMatching {
-            return true
-        }
-        
-        if numberOfShapesMatching && shapesNotMatching && shadingNotMatching && colorsMatching {
-            return true
-        }
-        
-        if numberOfShapesMatching && shapesNotMatching && shadingMatching && colorsMatching {
-            return true
-        }
-        
-        if numberOfShapesMatching && shapesMatching && shadingMatching && colorsMatching {
-            return true
+        if numberOfShapesMatching {
+            if shapesMatching {
+                if shadingMatching {
+                    if colorsMatching {
+                        return true
+                    } else if colorsNotMatching {
+                        return true
+                    }
+                } else if shadingNotMatching {
+                    if colorsMatching {
+                        return true
+                    } else if colorsNotMatching {
+                        return true
+                    }
+                }
+            } else if shapesNotMatching {
+                if shadingMatching {
+                    if colorsMatching {
+                        return true
+                    } else if colorsNotMatching {
+                        return true
+                    }
+                } else if shadingNotMatching {
+                    if colorsMatching {
+                        return true
+                    } else if colorsNotMatching {
+                        return true
+                    }
+                }
+            }
+        } else if numberOfShapesNotMatching {
+            if shapesMatching {
+                if shadingMatching {
+                    if colorsMatching {
+                        return true
+                    } else if colorsNotMatching {
+                        return true
+                    }
+                } else if shadingNotMatching {
+                    if colorsMatching {
+                        return true
+                    } else if colorsNotMatching {
+                        return true
+                    }
+                }
+            } else if shapesNotMatching {
+                if shadingMatching {
+                    if colorsMatching {
+                        return true
+                    } else if colorsNotMatching {
+                        return true
+                    }
+                } else if shadingNotMatching {
+                    if colorsMatching {
+                        return true
+                    } else if colorsNotMatching {
+                        return true
+                    }
+                }
+            }
         }
         
         return false
@@ -174,11 +192,10 @@ struct SetGame {
     
     // make new game
     
-    // init creates a full deck of cards, shuffled. It populates cards with abstract Ints, rather than concrete features
+    // init creates a full deck of cards, shuffled, and deals first 12 cards. It populates cards with abstract Ints, rather than concrete features
     init() {
         deck = []
         tableDeck = []
-        score = 0
         
         for numberOfShapes in 1...3 {
             for shape in 0...2 {

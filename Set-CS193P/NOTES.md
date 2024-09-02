@@ -80,3 +80,49 @@
             
         }
     }
+
+
+old match solution
+    if numberOfShapesNotMatching && shapesNotMatching && shadingNotMatching && colorsNotMatching {
+        return true
+    }
+    
+    if numberOfShapesMatching && shapesMatching && shadingNotMatching && colorsNotMatching {
+        return true
+    }
+    
+    if numberOfShapesMatching && shapesMatching && shadingNotMatching && colorsMatching {
+        return true
+    }
+    
+    if numberOfShapesMatching && shapesMatching && shadingMatching && colorsNotMatching {
+        return true
+    }
+    
+    if numberOfShapesNotMatching && shapesNotMatching && shadingNotMatching && colorsMatching {
+        return true
+    }
+    
+    if numberOfShapesNotMatching && shapesNotMatching && shadingMatching && colorsMatching {
+        return true
+    }
+    
+    if numberOfShapesNotMatching && shapesMatching && shadingMatching && colorsMatching {
+        return true
+    }
+    
+    if numberOfShapesMatching && shapesNotMatching && shadingNotMatching && colorsMatching {
+        return true
+    }
+    
+    if numberOfShapesMatching && shapesNotMatching && shadingNotMatching && colorsMatching {
+        return true
+    }
+    
+    if numberOfShapesMatching && shapesNotMatching && shadingMatching && colorsMatching {
+        return true
+    }
+    
+    if numberOfShapesMatching && shapesMatching && shadingMatching && colorsMatching {
+        return true
+    }
