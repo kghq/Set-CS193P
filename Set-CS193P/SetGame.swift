@@ -186,8 +186,16 @@ struct SetGame {
     
     // what to do after set found (button to discard set and draw new cards)
     mutating func newRound() {
-        tableDeck.removeAll(where: { $0.selectionState == .matched } )
-        drawCard(amount: 3)
+        if tableDeck.contains( where: { $0.selectionState == .matched } ) {
+            tableDeck.removeAll(where: { $0.selectionState == .matched } )
+            print(tableDeck.count)
+            if tableDeck.count < 12 {
+                let difference = 12 - tableDeck.count
+                drawCard(amount: difference)
+            }
+        } else {
+            drawCard(amount: 3)
+        }
     }
     
     // make new game

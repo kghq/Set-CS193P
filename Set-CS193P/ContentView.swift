@@ -94,9 +94,6 @@ struct CardView: View {
                         .rotationEffect(.degrees(45))
                 }
             }
-//            Text("\(card.numberOfShapes)")
-//            Text("\(card.shading)")
-//            Text("\(card.color)")
         }
         .frame(width: 70, height: 120)
         .padding()
