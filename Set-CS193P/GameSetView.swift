@@ -28,12 +28,11 @@ struct GameSetView: View {
     private var table: some View {
         GeometryReader { geometry in
             let gridItemSize = gridItemWidthThatFits(count: game.tableDeck.count, size: geometry.size, atAspectRatio: 2/3)
-            LazyVGrid(columns: [
-                GridItem(.adaptive(minimum: gridItemSize), spacing: 0)
-            
-            ], spacing: 0) {
+            LazyVGrid(columns: [GridItem(.adaptive(minimum: gridItemSize), spacing: 0)], spacing: 0) {
                 ForEach(game.tableDeck) { card in
                     CardView(card)
+                        .frame(minWidth: 60, maxWidth: .infinity, minHeight: 150, maxHeight: .infinity)
+                        .aspectRatio(2/3, contentMode: .fit)
                         .onTapGesture {
                             game.choose(card)
                         }
@@ -42,8 +41,20 @@ struct GameSetView: View {
         }
     }
     
-    func gridItemWidthThatFits( count: Int, size: CGSize, atAspectRatio aspectRatio: CGFloat) -> CGFloat {
-        return 95
+    func gridItemWidthThatFits(count: Int, size: CGSize, atAspectRatio aspectRatio: CGFloat) -> CGFloat {
+        let count = CGFloat(count)
+        var columnCount = 1.0
+        repeat {
+            let width = size.width / columnCount
+            let height = width / aspectRatio
+            
+            let rowCount = (count / columnCount).rounded(.up)
+            if rowCount * height < size.height {
+                return (size.width / columnCount).rounded(.down)
+            }
+            columnCount += 1
+        } while columnCount < count
+        return min(size.width / count, size.height * aspectRatio).rounded(.down)
     }
 }
 
@@ -99,13 +110,13 @@ struct CardView: View {
                     Rectangle()
                         .strokeBorder(color, lineWidth: 3)
                         .fill(color.opacity(shading))
-                        .frame(width: 20, height: 40)
+                        .frame(width: 30, height: 30)
                         .rotationEffect(.degrees(45))
                 }
             }
+            .padding(5)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .aspectRatio(3/4, contentMode: .fit)
         .background(
             RoundedRectangle(cornerRadius: 12)
                 .strokeBorder(selectionHighlight, lineWidth: 3)

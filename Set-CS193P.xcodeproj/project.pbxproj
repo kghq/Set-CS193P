@@ -42,7 +42,6 @@
 		330228602C8063C2006415E7 = {
 			isa = PBXGroup;
 			children = (
-				33C283842C85C03900E70D88 /* AspectVGrid.swift */,
 				3302286B2C8063C2006415E7 /* Set-CS193P */,
 				3302286A2C8063C2006415E7 /* Products */,
 			);
@@ -59,6 +58,7 @@
 		3302286B2C8063C2006415E7 /* Set-CS193P */ = {
 			isa = PBXGroup;
 			children = (
+				33C283842C85C03900E70D88 /* AspectVGrid.swift */,
 				3302286C2C8063C2006415E7 /* Set_CS193PApp.swift */,
 				3302286E2C8063C2006415E7 /* GameSetView.swift */,
 				3302287C2C80765D006415E7 /* SetGame.swift */,
