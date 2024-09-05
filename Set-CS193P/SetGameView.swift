@@ -27,13 +27,15 @@ struct SetGameView: View {
     
     private var table: some View {
         GeometryReader { geometry in
-            let gridItemSize = gridItemWidthThatFits(count: game.tableDeck.count, size: geometry.size, atAspectRatio: 2/3)
-            LazyVGrid(columns: [GridItem(.adaptive(minimum: gridItemSize))]) {
-                ForEach(game.tableDeck) { card in
-                    CardView(card)
-                        .onTapGesture {
-                            game.choose(card)
-                        }
+            ScrollView {
+                let gridItemSize = gridItemWidthThatFits(count: game.tableDeck.count, size: geometry.size, atAspectRatio: 2/3)
+                LazyVGrid(columns: [GridItem(.adaptive(minimum: gridItemSize < 60 ? 60 : gridItemSize), spacing: 0)], spacing: 0) {
+                    ForEach(game.tableDeck) { card in
+                        CardView(card)
+                            .onTapGesture {
+                                game.choose(card)
+                            }
+                    }
                 }
             }
         }
@@ -47,7 +49,7 @@ struct SetGameView: View {
             let height = width / aspectRatio
             
             let rowCount = (count / columnCount).rounded(.up)
-            if rowCount * height < size.height - 300 {
+            if rowCount * height < size.height {
                 return (size.width / columnCount).rounded(.down)
             }
             columnCount += 1

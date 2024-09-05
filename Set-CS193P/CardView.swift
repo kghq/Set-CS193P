@@ -55,20 +55,18 @@ struct CardView: View {
                                 .strokeBorder(color, lineWidth: 3)
                                 .fill(color.opacity(shading))
                                 .aspectRatio(contentMode: .fit)
-                                .frame(width: geometry.size.height / 4)
+                                .frame(width: geometry.size.width * 0.3)
                         } else if card.shape == 1 {
                             Circle()
                                 .strokeBorder(color, lineWidth: 3)
                                 .fill(color.opacity(shading))
-                                .frame(width: geometry.size.height / 4)
+                                .frame(width: geometry.size.width * 0.3)
                         } else {
                             Diamond()
                                 .stroke(color, lineWidth: 3)
                                 .fill(color.opacity(shading))
                                 //.aspectRatio(contentMode: .fill)
-                                .frame(
-                                    width: geometry.size.width / 3,
-                                    height: geometry.size.height / 4)
+                                .frame(width: geometry.size.width * 0.6, height: geometry.size.height * 0.2)
                         }
                     }
                 }
@@ -76,6 +74,7 @@ struct CardView: View {
             }
         }
         .aspectRatio(2/3, contentMode: .fit)
+        .padding(5)
     }
     
     init(_ card: SetGame.Card) {
